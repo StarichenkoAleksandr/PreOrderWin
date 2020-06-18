@@ -1,0 +1,94 @@
+﻿<Window x:Class="PreOrderWin.ListZakazWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PreOrderWin"
+        mc:Ignorable="d"
+        Title="ListZakazWin" Height="800" Width="1000" Foreground="Green" Background="Green"  ShowInTaskbar="False" ResizeMode="NoResize" 
+           WindowStyle="None" WindowState="Maximized">
+    <Window.Resources>
+        <!-- Создаем шаблон с названием ClassButton для элементов типа Button -->
+        <ControlTemplate x:Key="ClassButton" TargetType="{x:Type Button}">
+            <!-- Секция дня описания кнопки -->
+            <!-- Наружная граница белая -->
+            <Border BorderBrush="Blue" Background="Wheat" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Grid.RowSpan="2" />
+            </Border>
+        </ControlTemplate>
+
+
+        <ControlTemplate x:Key="ClassButton2" TargetType="{x:Type Button}">
+
+            <!-- Секция дня описания кнопки -->
+            <!-- Наружная граница белая -->
+            <Border BorderBrush="#FF0782B0" Background="#FF0782B0" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Margin="25,0,0,0">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Grid.RowSpan="2" />
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ClassButton3" TargetType="{x:Type Button}">
+            <Border BorderBrush="#FFEEE7E7" Background="#FFEEE7E7" BorderThickness="1,1,1,1" CornerRadius="15,15,15,15" Margin="0,0,0,0">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" Grid.RowSpan="2" />
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Background="#FF0E640E" Name="GridWin">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="RowPayment" Height="7*"/>
+                <RowDefinition  Height="719*"/>
+                <RowDefinition Height="74*"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="StackTake" VerticalAlignment="Center" Height="700" Margin="0,0,0,0" Grid.Row="1"  >
+            <Grid x:Name="StackGrid" Background="#FF0E640E" Height="700" >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="174*"/>
+                    <ColumnDefinition Width ="651*"/>
+                    <ColumnDefinition Width ="175*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="313*"/>
+                    <RowDefinition Height="59*"/>
+                    <RowDefinition Height="44*"/>
+                    <RowDefinition Height="45*"/>
+                    <RowDefinition Height="86*"/>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="OrderList" Grid.Row="0" Grid.Column="1" Content="Зміст замовлення" VerticalAlignment="Bottom"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="30" Foreground="White"  Height="42" Margin="0,0,0,0" Width="370"  />
+
+                <Button Template="{DynamicResource ClassButton}" x:Name="ListOrder" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Background="Wheat" Height="313" Margin="10,0,9,0"  >
+                    <ListView   Height="313" Width="620" x:Name="StrokaOrderList"  Foreground="White" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" SelectionChanged="StrokaOrder_SelectionChanged"  ScrollViewer.CanContentScroll="False"   ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Bottom">
+                        <ListView.ItemTemplate >
+                            <DataTemplate >
+                                <StackPanel  Background="White"   >
+                                    <TextBlock FontSize="20" Text="{Binding Title}" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Button>
+
+
+
+                <Label x:Name="Summa" Grid.Row="2"  Grid.Column="1" Content="Разом: кількість одиниць-   Сума -  "  VerticalAlignment="Bottom" HorizontalContentAlignment="Left" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="22" Foreground="White" Margin="0,0,0,0"  Height="42"/>
+
+                <Label x:Name="OrderHereAway" Grid.Row="3"  Grid.Column="1" Content="Моє замовлення - у ресторані "  VerticalAlignment="Bottom" HorizontalContentAlignment="Left" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="22" Foreground="White" Margin="0,0,0,0"  Height="42"/>
+
+                <Label x:Name="Oplata" Grid.Row="4"  Grid.Column="1" Content="Оплата : готівкою через касу"  VerticalAlignment="Bottom" HorizontalContentAlignment="Left" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="22" Foreground="White" Margin="0,0,0,0"  Height="42"/>
+
+                <Button Template="{DynamicResource ClassButton}" x:Name ="Button3" Grid.Column="1" Grid.Row="5" Margin="0,0"  Width="180" Height="80"  VerticalAlignment="Bottom"  HorizontalAlignment = "Left" Click="Delete_Oder_Click" >
+                    <Label Name="OrderDelete" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Скасувати" FontWeight="Bold" FontFamily="Trebuchet MS"  FontSize="28" Foreground="Black" Height="41" Margin="0,0,0,0" />
+                </Button>
+
+                <Button Template="{DynamicResource ClassButton}" x:Name ="Button4" Grid.Row="5" Grid.Column="1" Margin="232,0,239,0"  Width="180" Height="80"  VerticalAlignment="Bottom" HorizontalAlignment = "Center" Click="Ghage_Oder_Click">
+                    <Label Name="OpderEdit" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Редагувати" FontWeight="Bold" FontFamily="Trebuchet MS"  FontSize="28" Foreground="Black" Height="41" Margin="0,0,0,0"  />
+                </Button>
+
+                <Button Template="{DynamicResource ClassButton}" x:Name ="Button5" Grid.Row="5" Grid.Column="1" Margin="0,0,0,0"  Width="190" Height="80" VerticalAlignment="Bottom"  HorizontalAlignment = "Right" Click="Select_Order_Click" >
+                    <Label Name="Confirm" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Підтвердити" HorizontalContentAlignment="Center" FontWeight="Bold" FontFamily="Trebuchet MS"  FontSize="28" Foreground="Black" Height="41" Width="180"/>
+                </Button>
+
+            </Grid>
+        </StackPanel>
+     </Grid>
+</Window>
